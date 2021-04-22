@@ -3,12 +3,25 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
+  <Header></Header>
   <router-view />
+  <!-- When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars -->
 </template>
 
-<style>
+<script>
+import Header from "./layouts/includes/Header";
 
-@import './assets/styles/app.scss';
+export default {
+  components: {
+    Header
+  }
+}
+
+</script>
+
+
+<style>
+@import "./assets/styles/app.scss";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
