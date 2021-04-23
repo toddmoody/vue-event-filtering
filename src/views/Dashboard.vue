@@ -27,7 +27,7 @@
   <div class="min-h-screen bg-gray-100">
     <div class="py-10">
       <div
-        class="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8"
+        class="wrapper lg:grid lg:grid-cols-12 lg:gap-8"
       >
         <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
           <nav
@@ -88,7 +88,7 @@
           </nav>
         </div>
         <main class="lg:col-span-9 xl:col-span-10">
-          <div class="px-4 sm:px-0">
+          <!-- <div class="px-4 sm:px-0">
             <div class="sm:hidden">
               <label for="question-tabs" class="sr-only">Select a tab</label>
               <select
@@ -313,7 +313,7 @@
                 </article>
               </li>
             </ul>
-          </div>
+          </div> -->
         </main>
         <!-- <aside class="hidden xl:block xl:col-span-4">
           <div class="sticky top-4 space-y-4">

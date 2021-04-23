@@ -7,7 +7,7 @@
       ]"
       class="mt-6"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="wrapper">
         <div class="relative flex w-full justify-between">
           <div class="flex md:absolute md:left-0 md:inset-y-0 lg:static">
             <div class="flex-shrink-0 flex items-center">
