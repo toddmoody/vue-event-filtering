@@ -1,13 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-100">
     <div class="py-10">
-      <div
-        class="wrapper lg:grid lg:grid-cols-12 lg:gap-8"
-      >
+      <div class="wrapper lg:grid lg:grid-cols-12 lg:gap-8">
         <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
           <nav
             aria-label="Sidebar"
-            class="sticky top-4 divide-y divide-gray-300"
+            class="sticky top-4"
           >
             <div class="pt-4 pb-8 space-y-1">
               <p
@@ -89,63 +87,54 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Select -->
-              <div>
-                <label
-                  for="location"
-                  class="flex justify-start text-sm font-medium text-gray-700 mt-6"
-                  >Organiser</label
-                >
-                <select
-                  v-model="eventOrganiser"
-                  id="location"
-                  name="location"
-                  class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm rounded-md"
-                >
-                  <option value="">All</option>
-                  <option
-                    v-for="(organiser, index) in organisers"
-                    :key="index"
-                    :value="organiser"
-                  >
-                    {{ organiser }}
-                  </option>
-                </select>
-              </div>
             </div>
-            <div class="pt-10">
-              <p
-                class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider"
-                id="communities-headline"
+            <!-- Select - Organiser -->
+            <div>
+              <label
+                for="organiser"
+                class="flex justify-start text-sm font-medium text-gray-700 mt-6"
+                >Organiser</label
               >
-                My communities
-              </p>
-              <div
-                class="mt-3 space-y-2"
-                aria-labelledby="communities-headline"
+              <select
+                v-model="eventOrganiser"
+                name="organiser"
+                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm rounded-md"
               >
-                <a
-                  class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+                <option value="">All</option>
+                <option
+                  v-for="(organiser, index) in organisers"
+                  :key="index"
+                  :value="organiser"
                 >
-                  <span class="truncate"> Testing 1 </span>
-                </a>
-                <a
-                  class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
+                  {{ organiser }}
+                </option>
+              </select>
+            </div>
+            <!-- Select - Region -->
+            <div>
+              <label
+                for="region"
+                class="flex justify-start text-sm font-medium text-gray-700 mt-6"
+                >Region</label
+              >
+              <select
+                v-model="eventRegion"
+                name="region"
+                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm rounded-md"
+              >
+                <option value="">All</option>
+                <option
+                  v-for="(region, index) in regions"
+                  :key="index"
+                  :value="region"
                 >
-                  <span class="truncate"> Testing 2 </span>
-                </a>
-                <a
-                  class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
-                >
-                  <span class="truncate"> Testing 3 </span>
-                </a>
-              </div>
+                  {{ region }}
+                </option>
+              </select>
             </div>
           </nav>
         </div>
         <main class="lg:col-span-9 xl:col-span-10">
-          
           <!-- Search element -->
           <div class="min-w-0 flex-1">
             <div class="flex items-center py-4 md:mx-auto lg:mx-0">
@@ -300,6 +289,8 @@ export default {
       eventSort: [],
       eventType: [],
       eventOrganiser: "",
+      regions: ["Greater Auckland", "South Waikato", "Whakatane", "Taranaki", "Ruapehu"],
+      eventRegion: "",
       organisers: ["Roel Aufderehar", "Brenna Goyette", "Daniela Metz"],
       events: [
         {
@@ -444,7 +435,10 @@ export default {
     filteredEvents() {
       return this.events.filter((item) => {
         return (
-          (this.eventOrganiser.length === 0 || this.eventOrganiser.includes(item.organiser.name)) &&
+          (this.eventRegion.length === 0 ||
+            this.eventRegion.includes(item.region)) &&
+          (this.eventOrganiser.length === 0 ||
+            this.eventOrganiser.includes(item.organiser.name)) &&
           (this.eventType.length === 0 || this.eventType.includes(item.type)) &&
           (this.eventSearch.length === 0 ||
             item.title.toLowerCase().includes(this.eventSearch.toLowerCase()))
