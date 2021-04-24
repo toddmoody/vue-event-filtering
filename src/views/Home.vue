@@ -11,8 +11,31 @@
                 Filter events
               </p>
 
-              <!-- Checkboxes -->
+              <!-- Select - Category -->
               <div>
+                <label
+                  for="organiser"
+                  class="flex justify-start text-sm font-medium text-gray-700 mt-6"
+                  >Event Category</label
+                >
+                <select
+                  v-model="eventCategory"
+                  name="category"
+                  class="mt-1 mb-3 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-rose-500 focus:border-rose-500 sm:text-sm rounded-md"
+                >
+                  <option value="">All</option>
+                  <option
+                    v-for="(category, index) in categories"
+                    :key="index"
+                    :value="category"
+                  >
+                    {{ category }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- Checkboxes - Motorcycle -->
+              <div v-if="this.eventCategory === 'Motorcycle'">
                 <div class="relative flex items-start mb-4">
                   <div class="flex items-center h-5">
                     <input
@@ -261,7 +284,7 @@
                   <span
                     class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
                   >
-                    {{ event.type }}
+                    {{ event.category }}
                   </span>
                 </div>
               </div>
@@ -295,13 +318,14 @@ export default {
         { name: "test7", color: "black", size: "L" },
       ],
       eventPrice: {
-        value: [0, 50],
+        value: [0, 100],
       },
       sortBy: "name",
       eventSearch: "",
       eventSort: [],
       eventType: [],
       eventOrganiser: "",
+      eventCategory: "",
       regions: [
         "Greater Auckland",
         "South Waikato",
@@ -311,6 +335,7 @@ export default {
       ],
       eventRegion: "",
       organisers: ["Roel Aufderehar", "Brenna Goyette", "Daniela Metz"],
+      categories: ["Motorcycle", "Running"],
       events: [
         {
           id: 1,
@@ -318,7 +343,7 @@ export default {
           href: "#",
           startDate: "May 2, 2021",
           datetime: "2021-05-02",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 0,
           type: "Trail Ride",
           class: "Two wheelers",
@@ -339,7 +364,7 @@ export default {
           href: "#",
           startDate: "May 2, 2021",
           datetime: "2021-05-02",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 50,
           type: "Trail Ride",
           class: "Two wheelers",
@@ -360,7 +385,7 @@ export default {
           href: "#",
           startDate: "May 8, 2021",
           datetime: "2021-05-08",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 25,
           type: "Trail Ride",
           class: "Two wheelers",
@@ -381,7 +406,7 @@ export default {
           href: "#",
           startDate: "May 8, 2021",
           datetime: "2021-05-08",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 15,
           type: "Trials",
           class: "Two wheelers",
@@ -402,7 +427,7 @@ export default {
           href: "#",
           startDate: "May 9, 2021",
           datetime: "2021-05-09",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 0,
           type: "Enduro",
           class: "Two wheelers",
@@ -423,7 +448,7 @@ export default {
           href: "#",
           startDate: "May 9, 2021",
           datetime: "2021-09-02",
-          category: "Offroad/trail",
+          category: "Motorcycle",
           price: 95,
           type: "Motorcross",
           class: "Two wheelers",
@@ -435,6 +460,69 @@ export default {
             name: "Brenna Goyette",
             imageUrl:
               "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            href: "#",
+          },
+        },
+        {
+          id: 7,
+          title: "XTERRA Rotorua",
+          href: "#",
+          startDate: "May 9, 2021",
+          datetime: "2021-09-02",
+          category: "Running",
+          price: 95,
+          type: "Offroad/trail",
+          class: "All",
+          region: "Bay Of Plenty",
+          imageUrl: "https://source.unsplash.com/collection/8522632/600x400",
+          preview:
+            "People of all abilities can participate in the 21km trail walk or run.  The XTERRA Rotorua Festival is an event for people of all backgrounds that wish to enjoy an event set in some of the world's most stunning scenery.",
+          organiser: {
+            name: "Brenna Goyette",
+            imageUrl:
+              "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            href: "#",
+          },
+        },
+        {
+          id: 8,
+          title: "Kaikoura Adventure Race",
+          href: "#",
+          startDate: "May 21, 2021",
+          datetime: "2021-05-21",
+          category: "Running",
+          price: 95,
+          type: "Offroad/trail",
+          class: "All",
+          region: "Canterbury",
+          imageUrl: "https://source.unsplash.com/collection/11429766/600x400",
+          preview:
+            "The Kaikoura Adventure Race is a traditional adventure race with 24, 12, 6 and 3 hour course lengths on offer.",
+          organiser: {
+            name: "Daniela Metz",
+            imageUrl:
+              "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            href: "#",
+          },
+        },
+        {
+          id: 9,
+          title: "Sri Chinmoy 6-12-24 Hour Track Races & Team Relay",
+          href: "#",
+          startDate: "Nov 13, 2021",
+          datetime: "2021-11-13",
+          category: "Running",
+          price: 95,
+          type: "Track",
+          class: "All",
+          region: "Greater Auckland",
+          imageUrl: "https://source.unsplash.com/collection/4983022/600x400",
+          preview:
+            "The 24th Sri Chinmoy Marathon 6-12-24 Hour Track Race & 24-Hour Teams Relay is at AUT Millennium Stadium in Mairangi Bay, Auckland on Saturday, 13 November 2021.",
+          organiser: {
+            name: "Roel Aufderehar",
+            imageUrl:
+              "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
             href: "#",
           },
         },
@@ -458,22 +546,23 @@ export default {
         });
     },
     filteredEvents() {
-      return this.events
-        .filter((item) => {
-          return (
-            (this.eventSearch.length === 0 ||
-              item.title
-                .toLowerCase()
-                .includes(this.eventSearch.toLowerCase())) &&
-            (this.eventType.length === 0 ||
-              this.eventType.includes(item.type)) &&
-            (this.eventOrganiser.length === 0 ||
-              this.eventOrganiser.includes(item.organiser.name)) &&
-            (this.eventRegion.length === 0 ||
-              this.eventRegion.includes(item.region)) &&
-              (item.price >= this.eventPrice.value[0] && item.price <= this.eventPrice.value[1])
-          );
-        })
+      return this.events.filter((item) => {
+        return (
+          (this.eventSearch.length === 0 ||
+            item.title
+              .toLowerCase()
+              .includes(this.eventSearch.toLowerCase())) &&
+          (this.eventCategory.length === 0 ||
+            this.eventCategory.includes(item.category)) &&
+          (this.eventType.length === 0 || this.eventType.includes(item.type)) &&
+          (this.eventOrganiser.length === 0 ||
+            this.eventOrganiser.includes(item.organiser.name)) &&
+          (this.eventRegion.length === 0 ||
+            this.eventRegion.includes(item.region)) &&
+          item.price >= this.eventPrice.value[0] &&
+          item.price <= this.eventPrice.value[1]
+        );
+      });
       // .sort((a, b) => {
       //   return a[this.sortBy]
       //     .toString()
