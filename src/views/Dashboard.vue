@@ -12,12 +12,12 @@
     theme: {
       extend: {
         colors: {
-          rose: colors.rose,
+        rose: colors.rose,
         }
       }
     },
     plugins: [
-      // ...
+      // ...npm 
       require('@tailwindcss/forms'),
     ]
   }
