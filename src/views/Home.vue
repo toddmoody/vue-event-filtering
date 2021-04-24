@@ -3,10 +3,7 @@
     <div class="py-10">
       <div class="wrapper lg:grid lg:grid-cols-12 lg:gap-8">
         <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
-          <nav
-            aria-label="Sidebar"
-            class="sticky top-4"
-          >
+          <nav aria-label="Sidebar" class="sticky top-4">
             <div class="pt-4 pb-8 space-y-1">
               <p
                 class="text-left font-semibold text-gray-500 uppercase tracking-wider mb-4"
@@ -88,6 +85,17 @@
                 </div>
               </div>
             </div>
+
+            <!-- Slider - Price -->
+            <div>
+              <label
+                for="organiser"
+                class="flex justify-start text-sm font-medium text-gray-700 mt-6 mb-10"
+                >Price</label
+              >
+              <Slider v-model="eventPrice.value" v-bind="eventPrice"></Slider>
+            </div>
+
             <!-- Select - Organiser -->
             <div>
               <label
@@ -266,11 +274,13 @@
 </template>
 
 <script>
+import Slider from "@vueform/slider";
 import { SearchIcon } from "@heroicons/vue/solid";
 
 export default {
   components: {
     SearchIcon,
+    Slider,
   },
 
   data() {
@@ -284,12 +294,21 @@ export default {
         { name: "test6", color: "yellow", size: "XL" },
         { name: "test7", color: "black", size: "L" },
       ],
+      eventPrice: {
+        value: [0, 50],
+      },
       sortBy: "name",
       eventSearch: "",
       eventSort: [],
       eventType: [],
       eventOrganiser: "",
-      regions: ["Greater Auckland", "South Waikato", "Whakatane", "Taranaki", "Ruapehu"],
+      regions: [
+        "Greater Auckland",
+        "South Waikato",
+        "Whakatane",
+        "Taranaki",
+        "Ruapehu",
+      ],
       eventRegion: "",
       organisers: ["Roel Aufderehar", "Brenna Goyette", "Daniela Metz"],
       events: [
@@ -300,6 +319,7 @@ export default {
           startDate: "May 2, 2021",
           datetime: "2021-05-02",
           category: "Offroad/trail",
+          price: 0,
           type: "Trail Ride",
           class: "Two wheelers",
           region: "South Waikato",
@@ -320,6 +340,7 @@ export default {
           startDate: "May 2, 2021",
           datetime: "2021-05-02",
           category: "Offroad/trail",
+          price: 50,
           type: "Trail Ride",
           class: "Two wheelers",
           region: "Greater Auckland",
@@ -340,6 +361,7 @@ export default {
           startDate: "May 8, 2021",
           datetime: "2021-05-08",
           category: "Offroad/trail",
+          price: 25,
           type: "Trail Ride",
           class: "Two wheelers",
           region: "Whakatane",
@@ -360,6 +382,7 @@ export default {
           startDate: "May 8, 2021",
           datetime: "2021-05-08",
           category: "Offroad/trail",
+          price: 15,
           type: "Trials",
           class: "Two wheelers",
           region: "Taranaki",
@@ -380,6 +403,7 @@ export default {
           startDate: "May 9, 2021",
           datetime: "2021-05-09",
           category: "Offroad/trail",
+          price: 0,
           type: "Enduro",
           class: "Two wheelers",
           region: "South Waikato",
@@ -400,6 +424,7 @@ export default {
           startDate: "May 9, 2021",
           datetime: "2021-09-02",
           category: "Offroad/trail",
+          price: 95,
           type: "Motorcross",
           class: "Two wheelers",
           region: "Ruapehu",
@@ -433,17 +458,22 @@ export default {
         });
     },
     filteredEvents() {
-      return this.events.filter((item) => {
-        return (
-          (this.eventRegion.length === 0 ||
-            this.eventRegion.includes(item.region)) &&
-          (this.eventOrganiser.length === 0 ||
-            this.eventOrganiser.includes(item.organiser.name)) &&
-          (this.eventType.length === 0 || this.eventType.includes(item.type)) &&
-          (this.eventSearch.length === 0 ||
-            item.title.toLowerCase().includes(this.eventSearch.toLowerCase()))
-        );
-      });
+      return this.events
+        .filter((item) => {
+          return (
+            (this.eventSearch.length === 0 ||
+              item.title
+                .toLowerCase()
+                .includes(this.eventSearch.toLowerCase())) &&
+            (this.eventType.length === 0 ||
+              this.eventType.includes(item.type)) &&
+            (this.eventOrganiser.length === 0 ||
+              this.eventOrganiser.includes(item.organiser.name)) &&
+            (this.eventRegion.length === 0 ||
+              this.eventRegion.includes(item.region)) &&
+              (item.price >= this.eventPrice.value[0] && item.price <= this.eventPrice.value[1])
+          );
+        })
       // .sort((a, b) => {
       //   return a[this.sortBy]
       //     .toString()
@@ -451,5 +481,29 @@ export default {
       // });
     },
   },
+  mounted() {
+    console.log("array event 2 value", this.events[2].price);
+
+    if (
+      this.events[2].price >= this.eventPrice.value[0] &&
+      this.events[2].price <= this.eventPrice.value[1]
+    ) {
+      console.log("in the range");
+    } else {
+      console.log("outside the range");
+    }
+  },
 };
 </script>
+
+<style src="@vueform/slider/themes/default.css"></style>
+
+<style>
+.slider-tooltip {
+  background: rgba(225, 29, 72, var(--tw-bg-opacity));
+  border: rgba(225, 29, 72, var(--tw-bg-opacity));
+}
+.slider-connect {
+  background: rgba(225, 29, 72, var(--tw-bg-opacity));
+}
+</style>
