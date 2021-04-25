@@ -4,7 +4,7 @@
       <div class="wrapper lg:grid lg:grid-cols-12 lg:gap-8">
         <div class="hidden lg:block lg:col-span-3 xl:col-span-2">
           <nav aria-label="Sidebar" class="sticky top-4">
-            <div class="pt-4 pb-8 space-y-1">
+            <div class="pt-4 space-y-1">
               <p
                 class="text-left font-semibold text-gray-500 uppercase tracking-wider mb-4"
               >
@@ -32,6 +32,42 @@
                     {{ category }}
                   </option>
                 </select>
+              </div>
+
+              <!-- Checkboxes - Concerts & musicals -->
+              <div v-if="this.eventCategory === 'Concerts & musicals'">
+                <div class="relative flex items-start mb-4">
+                  <div class="flex items-center h-5">
+                    <input
+                      v-model="eventType"
+                      value="Musical"
+                      name="Musical"
+                      type="checkbox"
+                      class="focus:ring-transparent h-4 w-4 text-rose-500 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="Musical" class="font-medium text-gray-700"
+                      >Musical</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start mb-4">
+                  <div class="flex items-center h-5">
+                    <input
+                      v-model="eventType"
+                      value="Concert"
+                      name="Concert"
+                      type="checkbox"
+                      class="focus:ring-transparent h-4 w-4 text-rose-500 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="Concert" class="font-medium text-gray-700"
+                      >Concert</label
+                    >
+                  </div>
+                </div>
               </div>
 
               <!-- Checkboxes - Motorcycle -->
@@ -107,13 +143,51 @@
                   </div>
                 </div>
               </div>
+
+              <!-- Checkboxes - Running -->
+              <div v-if="this.eventCategory === 'Running'">
+                <div class="relative flex items-start mb-4">
+                  <div class="flex items-center h-5">
+                    <input
+                      v-model="eventType"
+                      value="Offroad/trail"
+                      name="Offroad/trail"
+                      type="checkbox"
+                      class="focus:ring-transparent h-4 w-4 text-rose-500 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="Offroad/trail" class="font-medium text-gray-700"
+                      >Offroad/trail</label
+                    >
+                  </div>
+                </div>
+                <div class="relative flex items-start mb-4">
+                  <div class="flex items-center h-5">
+                    <input
+                      v-model="eventType"
+                      value="Track"
+                      name="Track"
+                      type="checkbox"
+                      class="focus:ring-transparent h-4 w-4 text-rose-500 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="Track" class="font-medium text-gray-700"
+                      >Track</label
+                    >
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <hr class="mt-10 mb-8" />
 
             <!-- Slider - Price -->
             <div>
               <label
                 for="organiser"
-                class="flex justify-start text-sm font-medium text-gray-700 mt-6 mb-10"
+                class="flex justify-start text-sm font-medium text-gray-700 mb-10"
                 >Price</label
               >
               <Slider v-model="eventPrice.value" v-bind="eventPrice"></Slider>
@@ -335,22 +409,23 @@ export default {
       ],
       eventRegion: "",
       organisers: ["Roel Aufderehar", "Brenna Goyette", "Daniela Metz"],
-      categories: ["Motorcycle", "Running"],
+      categories: ["Concerts & musicals", "Motorcycle", "Running"],
       events: [
         {
           id: 1,
-          title: "Redwoods Trail Ride",
+          title: "Madagascar The Musical",
           href: "#",
-          startDate: "May 2, 2021",
-          datetime: "2021-05-02",
-          category: "Motorcycle",
-          price: 0,
-          type: "Trail Ride",
-          class: "Two wheelers",
-          region: "South Waikato",
-          imageUrl: "https://source.unsplash.com/collection/4724153/600x400",
+          startDate: "Apr 30, 2021",
+          datetime: "2021-04-30",
+          category: "Concerts & musicals",
+          price: 44,
+          type: "Musical",
+          class: "Children",
+          region: "Bay Of Plenty",
+          imageUrl:
+            "https://cdn.eventfinda.co.nz/uploads/events/transformed/1558288-680200-34.png",
           preview:
-            "Exciting pine forest trail ride which will provide fun and challenges for all riders. For the first time there will be two track approximately 15km long both with several home tracks.",
+            "Based on the smash-hit DreamWorks animated motion picture, Madagascar The Musical follows all your favourite cracka-lackin’ friends as they escape from their home in New York’s Central Park Zoo.",
           organiser: {
             name: "Roel Aufderehar",
             imageUrl:
@@ -422,6 +497,27 @@ export default {
           },
         },
         {
+          id: 8,
+          title: "Kaikoura Adventure Race",
+          href: "#",
+          startDate: "May 21, 2021",
+          datetime: "2021-05-21",
+          category: "Running",
+          price: 95,
+          type: "Offroad/trail",
+          class: "All",
+          region: "Canterbury",
+          imageUrl: "https://source.unsplash.com/collection/11429766/600x400",
+          preview:
+            "The Kaikoura Adventure Race is a traditional adventure race with 24, 12, 6 and 3 hour course lengths on offer.",
+          organiser: {
+            name: "Daniela Metz",
+            imageUrl:
+              "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            href: "#",
+          },
+        },
+        {
           id: 5,
           title: "Atiamuri Classic Vinduro",
           href: "#",
@@ -444,18 +540,19 @@ export default {
         },
         {
           id: 6,
-          title: "Taumaranui MX Funday",
+          title: "Queen: It's A Kinda Magic",
           href: "#",
-          startDate: "May 9, 2021",
-          datetime: "2021-09-02",
-          category: "Motorcycle",
+          startDate: "May 3, 2021",
+          datetime: "2021-05-03",
+          category: "Concerts & musicals",
           price: 95,
-          type: "Motorcross",
+          type: "Concert",
           class: "Two wheelers",
-          region: "Ruapehu",
-          imageUrl: "https://source.unsplash.com/collection/1409758/600x400",
+          region: "Bay Of Plenty",
+          imageUrl:
+            "https://cdn.eventfinda.co.nz/uploads/events/transformed/1573352-686369-34.jpg?v=7",
           preview:
-            "A classic day of family fun a the smell of 2-stroke engines. See you there.",
+            "Immerse yourself in the spectacle, grandeur and energy of the world’s greatest Rock band with Queen: It’s a Kinda Magic, celebrating the legacy of Queen and Freddie Mercury.",
           organiser: {
             name: "Brenna Goyette",
             imageUrl:
@@ -481,27 +578,6 @@ export default {
             name: "Brenna Goyette",
             imageUrl:
               "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-            href: "#",
-          },
-        },
-        {
-          id: 8,
-          title: "Kaikoura Adventure Race",
-          href: "#",
-          startDate: "May 21, 2021",
-          datetime: "2021-05-21",
-          category: "Running",
-          price: 95,
-          type: "Offroad/trail",
-          class: "All",
-          region: "Canterbury",
-          imageUrl: "https://source.unsplash.com/collection/11429766/600x400",
-          preview:
-            "The Kaikoura Adventure Race is a traditional adventure race with 24, 12, 6 and 3 hour course lengths on offer.",
-          organiser: {
-            name: "Daniela Metz",
-            imageUrl:
-              "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
             href: "#",
           },
         },
