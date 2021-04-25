@@ -193,6 +193,8 @@
               <Slider v-model="eventPrice.value" v-bind="eventPrice"></Slider>
             </div>
 
+            <hr class="mt-10 mb-8" />
+
             <!-- Select - Organiser -->
             <div>
               <label
@@ -348,7 +350,7 @@
                       </a>
                     </div>
                     <div class="ml-3">
-                      <p class="text-sm font-medium text-gray-900">
+                      <p class="text-xs font-medium text-gray-900">
                         <a :href="event.organiser.href" class="hover:underline">
                           {{ event.organiser.name }}
                         </a>
@@ -356,7 +358,7 @@
                     </div>
                   </div>
                   <span
-                    class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800"
+                    class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
                   >
                     {{ event.category }}
                   </span>
@@ -392,7 +394,7 @@ export default {
         { name: "test7", color: "black", size: "L" },
       ],
       eventPrice: {
-        value: [0, 100],
+        value: [0, 80],
       },
       sortBy: "name",
       eventSearch: "",
@@ -402,6 +404,7 @@ export default {
       eventCategory: "",
       regions: [
         "Greater Auckland",
+        "Bay Of Plenty",
         "South Waikato",
         "Whakatane",
         "Taranaki",
@@ -503,7 +506,7 @@ export default {
           startDate: "May 21, 2021",
           datetime: "2021-05-21",
           category: "Running",
-          price: 95,
+          price: 75,
           type: "Offroad/trail",
           class: "All",
           region: "Canterbury",
@@ -545,7 +548,7 @@ export default {
           startDate: "May 3, 2021",
           datetime: "2021-05-03",
           category: "Concerts & musicals",
-          price: 95,
+          price: 65,
           type: "Concert",
           class: "Two wheelers",
           region: "Bay Of Plenty",
@@ -567,7 +570,7 @@ export default {
           startDate: "May 9, 2021",
           datetime: "2021-09-02",
           category: "Running",
-          price: 95,
+          price: 62,
           type: "Offroad/trail",
           class: "All",
           region: "Bay Of Plenty",
@@ -588,7 +591,7 @@ export default {
           startDate: "Nov 13, 2021",
           datetime: "2021-11-13",
           category: "Running",
-          price: 95,
+          price: 45,
           type: "Track",
           class: "All",
           region: "Greater Auckland",
@@ -665,8 +668,9 @@ export default {
 
 <style>
 .slider-tooltip {
-  background: rgba(225, 29, 72, var(--tw-bg-opacity));
-  border: rgba(225, 29, 72, var(--tw-bg-opacity));
+  background: none;
+  color: #222;
+  border: 1px solid rgba(225, 29, 72, var(--tw-bg-opacity));
 }
 .slider-connect {
   background: rgba(225, 29, 72, var(--tw-bg-opacity));
